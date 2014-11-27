@@ -13,6 +13,12 @@ namespace Helpful.CircuitBreaker.Schedulers
 
         public SequentialRetryScheduler(int[] retrySequenceSeconds)
         {
+            if (retrySequenceSeconds == null)
+                throw new ArgumentNullException("retrySequenceSeconds");
+
+            if (retrySequenceSeconds.Length < 1)
+                throw new ArgumentException("retrySequenceSeconds must contain at least one value");
+
             _sequence = retrySequenceSeconds;
             Reset();
         }
